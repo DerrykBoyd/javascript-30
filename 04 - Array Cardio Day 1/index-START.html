@@ -31,17 +31,37 @@
 
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    let fifteeens = inventors.filter(inv => {
+      if (inv.year < 1600 && inv.year >= 1500) return inv;
+    });
+    console.log('Filtered 15s', fifteeens);
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
+    let names = inventors.map(inv => {
+      return {first: inv.first, last: inv.last}
+    })
+    console.log('Names', names);
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    let sorted = [...inventors].sort((a, b) => a.year - b.year)
+    console.log('Sorted Oldest', sorted);
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
+    let years = inventors.reduce((acc, cur) => {
+      return acc + (cur.passed - cur.year)
+    }, 0)
+    console.log('Total Years', years);
 
     // 5. Sort the inventors by years lived
+    let sorted2 = [...inventors].sort((a,b) => {
+      a.lived = a.passed - a.year;
+      b.lived = b.passed - b.year;
+      return (b.passed - b.year) - (a.passed - a.year)
+    })
+    console.log('Sorted Years Lived', sorted2)
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
@@ -49,10 +69,24 @@
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    let sorted3 = [...people].sort((a,b) => {
+      let aName = a.split(', ')[1].toLowerCase()
+      let bName = b.split(', ')[1].toLowerCase()
+      if (aName < bName) return -1
+      if (aName > bName) return 1
+      return 0
+    })
+    console.log('Sorted Peeps', sorted3);
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+    let instances = data.reduce((acc, cur) => {
+      if (!acc[cur]) acc[cur] = 1;
+      else acc[cur] ++ 
+      return acc
+    }, {})
+    console.log('Instances', instances)
 
   </script>
 </body>
