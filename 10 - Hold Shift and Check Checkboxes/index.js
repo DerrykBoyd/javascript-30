@@ -2,11 +2,10 @@ console.log('Hold Shift!')
 
 const boxes = document.querySelectorAll('input');
 let lastChecked = null;
-let isShift = false;
 
 boxes.forEach((box, ind) => {
-  box.addEventListener('click', () => {
-    if (isShift) {
+  box.addEventListener('click', (e) => {
+    if (e.shiftKey && box.checked) {
       // top to bottom
       if (lastChecked < ind) {
         for (let i = lastChecked; i <= ind; i++) {
@@ -23,13 +22,5 @@ boxes.forEach((box, ind) => {
     }
     if (box.checked) lastChecked = ind;
   })
-})
-
-document.addEventListener('keydown', e => {
-  if (e.key === 'Shift') isShift = true;
-})
-
-document.addEventListener('keyup', e => {
-  if (e.key === 'Shift') isShift = false;
 })
 
